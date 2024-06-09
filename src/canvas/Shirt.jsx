@@ -1,11 +1,9 @@
 import { easing } from "maath";
 import { useSnapshot } from "valtio";
 import { useFrame } from "@react-three/fiber";
-// Decal is some kind of mesh or texture
 import { Decal, useGLTF, useTexture } from "@react-three/drei";
-
-import state from "../store";
 import { useRef } from "react";
+import state from "../store";
 
 export default function Shirt() {
   const snap = useSnapshot(state);
@@ -30,8 +28,9 @@ export default function Shirt() {
         geometry={nodes.T_Shirt_male.geometry}
         material={materials.lambert1}
         material-roughness={1}
-        dispose={null}>
-        {snap.isFullTexture && (
+        dispose={null}
+      >
+        {snap.isFullTexture && fullTexture && (
           <Decal
             position={[0, 0, 0]}
             rotation={[0, 0, 0]}
@@ -40,14 +39,14 @@ export default function Shirt() {
           />
         )}
 
-        {snap.isLogoTexture && (
+        {snap.isLogoTexture && logoTexture && (
           <Decal
             position={[0, 0.04, 0.15]}
             rotation={[0, 0, 0]}
             scale={0.15}
             map={logoTexture}
             // Changing the quality of the logo
-            map-anisotropy={16}
+            map-anisotropy={logoTexture.anisotropy ? logoTexture.anisotropy : 16}
             depthTest={false}
             depthWrite={true}
           />
