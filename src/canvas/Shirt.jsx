@@ -10,18 +10,18 @@ export default function Shirt() {
   const { nodes, materials } = useGLTF("/shirt_baked.glb");
   const meshRef = useRef();
 
+  // Correctly use the hooks inside the functional component
   const logoTexture = useTexture(snap.logoDecal);
   const fullTexture = useTexture(snap.fullDecal);
 
-  // To let the T-Shirt tracks state changes
-  const stateString = JSON.stringify(snap);
-
-  useFrame((state, delta) =>
-    easing.dampC(materials.lambert1.color, snap.color, 0.25, delta)
-  );
+  useFrame((state, delta) => {
+    if (materials.lambert1) {
+      easing.dampC(materials.lambert1.color, snap.color, 0.25, delta);
+    }
+  });
 
   return (
-    <group key={stateString}>
+    <group key={JSON.stringify(snap)}>
       <mesh
         ref={meshRef}
         castShadow
@@ -46,7 +46,7 @@ export default function Shirt() {
             scale={0.15}
             map={logoTexture}
             // Changing the quality of the logo
-            map-anisotropy={logoTexture.anisotropy ? logoTexture.anisotropy : 16}
+            anisotropy={16}
             depthTest={false}
             depthWrite={true}
           />
