@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+// src/pages/Customizer.jsx
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSnapshot } from "valtio";
 
 import config from "../config/config";
 import state from "../store";
-import { download } from "../assets";
+import download from "../assets/download.png"; // Ensure this import path is correct
 import { downloadCanvasToImage, reader } from "../config/helpers";
 import { EditorTabs, FilterTabs, DecalTypes } from "../config/constants";
 import { fadeAnimation, slideAnimation } from "../config/motion";
@@ -30,7 +31,6 @@ const Customizer = () => {
     stylishShirt: false,
   });
 
-  // Show tab content depending on the activeTab
   const generateTabContent = () => {
     switch (activeEditorTab) {
       case "colorpicker":
@@ -58,7 +58,7 @@ const Customizer = () => {
       setGeneratingImg(true);
 
       const response = await fetch(
-        "https://threed-t-shirt-website.onrender.com/api/v1/dalle",
+        "https://creator-api.ninegrid.ca/api/v1/dalle",
         {
           method: "POST",
           headers: {
@@ -105,7 +105,6 @@ const Customizer = () => {
         break;
     }
 
-    // After setting the state, activeFilterTab is updated
     setActiveFilterTab((prevState) => {
       return {
         ...prevState,
@@ -128,7 +127,8 @@ const Customizer = () => {
           <motion.div
             key="custom"
             className="absolute top-0 left-0 z-10"
-            {...slideAnimation("left")}>
+            {...slideAnimation("left")}
+          >
             <div className="flex items-center min-h-screen">
               <div className="editortabs-container tabs">
                 {EditorTabs.map((tab) => (
@@ -146,7 +146,8 @@ const Customizer = () => {
 
           <motion.div
             className="absolute z-10 top-5 right-5"
-            {...fadeAnimation}>
+            {...fadeAnimation}
+          >
             <CustomButton
               type="filled"
               title="Go Back"
@@ -157,7 +158,8 @@ const Customizer = () => {
 
           <motion.div
             className="filtertabs-container"
-            {...slideAnimation("up")}>
+            {...slideAnimation("up")}
+          >
             {FilterTabs.map((tab) => (
               <Tab
                 key={tab.name}
