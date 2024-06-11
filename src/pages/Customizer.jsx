@@ -58,7 +58,7 @@ const Customizer = () => {
       setGeneratingImg(true);
 
       const response = await fetch(
-        "https://creator-api.ninegrid.ca/api/v1/dalle",
+        config.production.backendUrl,
         {
           method: "POST",
           headers: {
@@ -120,6 +120,10 @@ const Customizer = () => {
     });
   };
 
+  const rotateShirt = () => {
+    state.rotation = state.rotation === 0 ? 180 : 0;
+  };
+
   return (
     <AnimatePresence>
       {!snap.intro && (
@@ -153,6 +157,12 @@ const Customizer = () => {
               title="Go Back"
               handleClick={() => (state.intro = true)}
               customStyles="w-fit px-4 py-2.5 font-bold text-sm"
+            />
+            <CustomButton
+              type="outline"
+              title="Rotate Shirt"
+              handleClick={rotateShirt}
+              customStyles="w-fit px-4 py-2.5 font-bold text-sm mt-2"
             />
           </motion.div>
 

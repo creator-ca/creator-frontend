@@ -1,4 +1,5 @@
-import { swatch, fileIcon, ai, logoShirt, stylishShirt } from "../assets";
+// src/config/constants.js
+import { swatch, fileIcon, ai, logoShirt, stylishShirt, backLogoShirt } from "../assets";
 
 export const EditorTabs = [
   {
@@ -24,6 +25,10 @@ export const FilterTabs = [
     name: "stylishShirt",
     icon: stylishShirt,
   },
+  {
+    name: "backLogoShirt", // Add this line
+    icon: backLogoShirt, // Ensure the icon exists
+  },
 ];
 
 export const DecalTypes = {
@@ -34,5 +39,9 @@ export const DecalTypes = {
   full: {
     stateProperty: "fullDecal",
     filterTab: "stylishShirt",
+  },
+  backLogo: {
+    stateProperty: "backLogoDecal",
+    filterTab: "backLogoShirt",
   },
 };

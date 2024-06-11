@@ -1,3 +1,5 @@
+// src/canvas/Shirt.jsx
+
 import { easing } from "maath";
 import { useSnapshot } from "valtio";
 import { useFrame } from "@react-three/fiber";
@@ -10,9 +12,9 @@ export default function Shirt() {
   const { nodes, materials } = useGLTF("/shirt_baked.glb");
   const meshRef = useRef();
 
-  // Correctly use the hooks inside the functional component
   const logoTexture = useTexture(snap.logoDecal);
   const fullTexture = useTexture(snap.fullDecal);
+  const backLogoTexture = useTexture(snap.backLogoDecal);
 
   useFrame((state, delta) => {
     if (materials.lambert1) {
@@ -21,7 +23,7 @@ export default function Shirt() {
   });
 
   return (
-    <group key={JSON.stringify(snap)}>
+    <group rotation={[0, snap.rotation * Math.PI / 180, 0]}>
       <mesh
         ref={meshRef}
         castShadow
@@ -45,7 +47,18 @@ export default function Shirt() {
             rotation={[0, 0, 0]}
             scale={0.15}
             map={logoTexture}
-            // Changing the quality of the logo
+            anisotropy={16}
+            depthTest={false}
+            depthWrite={true}
+          />
+        )}
+
+        {snap.isBackLogoTexture && backLogoTexture && (
+          <Decal
+            position={[0, 0.04, -0.15]}
+            rotation={[0, 0, 0]}
+            scale={0.15}
+            map={backLogoTexture}
             anisotropy={16}
             depthTest={false}
             depthWrite={true}

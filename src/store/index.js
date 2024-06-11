@@ -1,3 +1,5 @@
+// src/store/index.js
+
 import { proxy } from "valtio";
 
 const state = proxy({
@@ -5,8 +7,11 @@ const state = proxy({
   color: "#EFBD48",
   isLogoTexture: true,
   isFullTexture: false,
+  isBackLogoTexture: false,
   logoDecal: "./threejs.png",
   fullDecal: "./threejs.png",
+  backLogoDecal: "./threejs.png",
+  rotation: 0, // To handle the rotation of the shirt
 });
 
 export default state;

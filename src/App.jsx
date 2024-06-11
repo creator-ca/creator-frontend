@@ -2,14 +2,14 @@ import Canvas from "./canvas";
 import Customizer from "./pages/Customizer";
 import Home from "./pages/Home";
 
-const originalConsoleError = console.error;
+// const originalConsoleError = console.error;
 
-console.error = (...args) => {
-  if (typeof args[0] === 'string' && args[0].includes('Support for defaultProps will be removed')) {
-    return;
-  }
-  originalConsoleError(...args);
-};
+// console.error = (...args) => {
+//   if (typeof args[0] === 'string' && args[0].includes('Support for defaultProps will be removed')) {
+//     return;
+//   }
+//   originalConsoleError(...args);
+// };
 
 
 function App() {

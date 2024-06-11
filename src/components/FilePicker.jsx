@@ -1,3 +1,5 @@
+// src/components/FilePicker.jsx
+
 import CustomButton from "./CustomButton";
 
 export default function FilePicker({ file, setFile, readFile }) {
@@ -30,6 +32,12 @@ export default function FilePicker({ file, setFile, readFile }) {
           type="filled"
           title="Full"
           handleClick={() => readFile("full")}
+          customStyles="text-xs"
+        />
+        <CustomButton
+          type="outline"
+          title="Back Logo" // Add this button
+          handleClick={() => readFile("backLogo")}
           customStyles="text-xs"
         />
       </div>
